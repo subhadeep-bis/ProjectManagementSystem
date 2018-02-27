@@ -1,0 +1,31 @@
+    <% include ./partials/header %>
+    <div class="ui main text container piled segment"> 
+        <form class="ui form" action="/projects" method="POST">
+          <h3 class="ui dividing header">Project Details</h3>
+          <div class="field">
+            <label>Project Name</label>
+            <input type="text" name="p_name" placeholder="Project Name">
+          </div>
+          <div class="two fields">
+              <div class="field">
+                  <label>Max Members</label>
+                  <input type="number" min="1" name="p_maxm" placeholder="Max Members"></input>
+              </div>
+              <div class="field">
+                  <label>Progress</label>
+                  <input type="number" max="100" min="1" name="progress" value="0" placeholder="Progress"></input>
+              </div>    
+          </div>
+          <div class="field">
+          <label>Project Requirements</label>
+            <input placeholder="Give values separated with Commas!" name="p_req"></input>
+          </div>
+          <div class="field">
+            <label>Overview</label>
+            <textarea name="overview" placeholder="project details goes here!"></textarea>
+          </div>
+          <button class="ui button inverted blue">submit</button>
+        </form>
+    </div>   
+        
+<% include ./partials/footer %>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PROJECT MANAGEMENT SYSTEM</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css" rel="stylesheet" type="text/css"></link>
+        <link rel="stylesheet" type="text/css" href="../stylesheets/app.css"></link>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    </head>
+    <body>
+        <div class="ui inverted menu" id="aho" style="border-radius: 0;">
+          <a class="active item" href="/">
+            Project Management System
+          </a>
+          <a class="item" href="/projects/about">
+            ABOUT
+          </a>
+          <% if(currentUser && currentUser.mentor == 'no'){ %>
+            <a class="item" href="/projects/student/<%= currentUser.user_id %>">
+              YOUR PROJECTS
+            </a>
+          <% } else if(currentUser && currentUser.mentor == 'yes') {%>
+            <a class="item" href="/projects/mentor/<%= currentUser.user_id %>">
+              YOUR PROJECTS
+            </a>
+            <a class="item" href="/projects/new">
+              CREATE A PROJECT
+            </a>
+          <% } %>
+          <% if(!currentUser){ %>
+            <a class="item" href="/projects/new">
+              CREATE A PROJECT
+            </a>
+          <% } %>
+          <div class="right menu">
+            <!--<div class="item">-->
+            <!--  <div class="ui icon input">-->
+            <!--    <input type="text" placeholder="Search...">-->
+            <!--    <i class="search link icon"></i>-->
+            <!--  </div>-->
+            <!--</div>-->
+            <% if(!currentUser){ %>
+              <a class="ui item" href="/register">
+                Sign Up
+              </a>
+              <a class="ui item" href="/login">
+                Login
+              </a>
+            <% } else { %>
+              <a class="ui item">
+                Signed in as: <span></span><em><%=currentUser.username %></em>
+              </a>
+              <a class="ui item" href="/logout">
+                Logout
+              </a>
+            <% } %>
+          </div>
+        </div>
+    </div>
+    
+  <div class="ui main text container">
+    <% if (error && error.length > 0) { %>
+      <div class="ui red message">
+          <%= error %>
+      </div>
+    <% } %>
+    <% if (success && success.length > 0) { %>
+      <div class="ui green message">
+          <%= success %>
+      </div>
+    <% } %>
+  </div>
+    
+   

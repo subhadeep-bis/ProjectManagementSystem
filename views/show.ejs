@@ -1,0 +1,94 @@
+<%  include ./partials/header %>
+
+    <div class="ui main text piled container segment">
+        <div class="ui huge center aligned header"><%= foundProject.p_name %></div>
+        <div class="description">
+            <%= foundProject.overview %>
+        </div>
+        <div class="content">
+            <strong> <%= foundProject.p_date.toDateString() %> </strong>
+        </div>
+        <div class="content">
+            <label><strong>Max Members:</strong></label>
+            <strong> <%= foundProject.p_maxm %> </strong>
+        </div>
+        <div class="ui segment" style="overflow: auto;">
+            <strong style="font-size: 1.5em">Mentor:  </span><em><%= foundMentor.m_firstname %> <%= foundMentor.m_lastname %></em></strong>
+            <% if(currentUser && currentUser.mentor==="yes" && foundMentor.m_id === currentUser.user_id) { %>
+            <a class="ui button inverted purple" style="float: right;" href="/projects/<%= foundProject.p_id %>/edit">edit</a>
+            <form id="deleteBtn" action="/projects/<%= foundProject.p_id %>?_method=DELETE" method="POST">
+                <button class="ui button inverted red" style="float: right;">delete</button>
+            </form>
+            <% } %>
+        </div>
+        <div class="ui main text segment">
+            <div class="ui small header">Project Requirements:</div>
+            <% foundProject.p_req.split(",").forEach(function(a){ %>
+                <li><%= a %></li>
+            <% }); %>
+        </div>
+        
+        <div class="ui main text segment">
+            <div class="ui small header">Students Enrolled:</div>
+            <% if(students.length > 0) { %>
+            <% students.forEach(function(a){ %>
+                <div>
+                    <li><%= a.s_firstname %> <%= a.s_lastname %> <% if (currentUser && currentUser.mentor == "yes" && currentUser.user_id === foundMentor.m_id) {%> <a class="ui button inverted red" style="display: inline-block; float: right; padding: 5px;" href="/projects/registered/remove/<%= foundProject.p_id %>/<%= a.s_id %>"><i class="ban icon"></i></a> <% } %> </li>
+                </div>
+                <p></p>
+            <% }); %>
+            <% } else { %>
+            <div class="ui message warning">
+                Students yet to Enroll!
+            </div>
+            <% } %>
+        </div>
+        
+        <% if(currentUser && currentUser.mentor === "no") {%>
+        <% var found = false; %>
+        <% if (registeredProjects.length>0){ %>
+            <% registeredProjects.forEach(function(registered){ %> 
+                <% if(registered.p_id === foundProject.p_id){ %>
+                    <% found = true; %>
+                <% } %>
+            <% }); %>
+            <% if(found === true) { %> 
+                <div class="ui info message">
+                    <p>You are enrolled in this project!</p>
+                    <a class="ui button inverted red" href="/projects/registered/remove/<%= foundProject.p_id %>/<%= currentUser.user_id %>">Remove Membership</a>
+                </div>
+            <% } else { %>
+                <% if(value1 < foundProject.p_maxm) { %>
+                    <div class="ui info message">
+                        <p>Click join to get enrolled in this project!</p>
+                        <a class="ui button inverted orange" href="/projects/join/<%= foundProject.p_id %>">Join</a>
+                    </div>
+                <% } else { %>
+                    <div class="ui info message">
+                        <p>Vacancy Full!</p>
+                    </div>
+                <% } %>
+            <% } %>
+        <% } else { %>
+            <% if(value1 < foundProject.p_maxm) { %>
+                    <div class="ui info message">
+                        <p>Click join to get enrolled in this project!</p>
+                        <a class="ui button inverted orange" href="/projects/join/<%= foundProject.p_id %>">Join</a>
+                    </div>
+                <% } else { %>
+                    <div class="ui negative message">
+                        <p>Vacancy Full!</p>
+                        <a class="ui disabled button" href="/projects/join/<%= foundProject.p_id %>">Join</a>
+                    </div>
+                <% } %>
+        <% } %>
+        <% } %>
+        <% if(!currentUser) { %>
+            <div class="ui info message">
+                <p>Click join to get enrolled in this project!</p>
+                <a class="ui button inverted orange" href="/projects/join/<%= foundProject.p_id %>">Join</a>
+            </div>
+        <%  } %>
+    </div>
+
+<%  include ./partials/footer %>

@@ -1,0 +1,40 @@
+<%  include ./partials/header %>
+
+<div class="ui main text container">
+    <div class="ui huge header">Projects undertaken by <em><%= student.s_firstname %> <%= student.s_lastname %></em></div>
+        <div class="ui top attached segment">
+          <% if (studentProjects && studentProjects.length>0){ %>
+          <div class="ui divided items">
+            <% studentProjects.forEach(function(project){ %>
+                   
+                      <div class="item">
+                        <div class="image">
+                          <img src="<%= project.p_image  %>">
+                        </div>
+                        <div class="content">
+                          <a class="header" href="/projects/<%= project.p_id %>"><%= project.p_name %></a>
+                          <div class="description">
+                            <%= project.overview.substring(0, 200) %>
+                          </div>
+                          <div class="extra">
+                            <div>
+                              <label>Progress:</label><span></span>
+                              <progress value="<%= project.progress %>" max="100"></progress> <%= project.progress %> 
+                            </div>
+                            <a class="ui floated inverted blue button" href="/projects/<%= project.p_id %>">
+                                About <i class="angle right icon"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    
+             <% }); %>
+            </div>
+            <% }else{ %>
+            <div class="ui red message">
+                No Projects To Be Shown !!
+            </div>
+            <% } %>
+      </div>
+  </div>
+<%  include ./partials/footer %>

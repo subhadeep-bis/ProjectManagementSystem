@@ -1,0 +1,31 @@
+    <% include ./partials/header %>
+    <div class="ui main text container piled segment"> 
+        <form class="ui form" action="/projects/<%= foundProject.p_id %>?_method=PUT" method="POST">
+          <h3 class="ui dividing header">Project Details</h3>
+          <div class="field">
+            <label>Project Name</label>
+            <input type="text" name="p_name" placeholder="Project Name" value="<%= foundProject.p_name %>">
+          </div>
+          <div class="two fields">
+              <div class="field">
+                  <label>Max Members</label>
+                  <input type="number" min="1" name="p_maxm" placeholder="Max Members" value="<%= foundProject.p_maxm %>">
+              </div>
+              <div class="field">
+                  <label>Progress</label>
+                  <input type="number" max="100" min="1" name="progress" placeholder="Progress" value="<%= foundProject.progress %>">
+              </div>    
+          </div>
+          <div class="field">
+          <label>Project Requirements</label>
+            <input placeholder="Give values separated with Commas!" name="p_req" value="<%= foundProject.p_req %>">
+          </div>
+          <div class="field">
+            <label>Overview</label>
+            <textarea name="overview" placeholder="project details goes here!"><%= foundProject.overview %></textarea>
+          </div>
+          <button class="ui button inverted blue">update</button>
+        </form>
+    </div>   
+        
+<% include ./partials/footer %>

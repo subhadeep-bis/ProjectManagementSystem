@@ -1,0 +1,46 @@
+<% include ./partials/header %>
+<div class="ui main text container piled segment"> 
+        <form class="ui form" action="/register" method="POST">
+          <h3 class="ui dividing header">REGISTRATION</h3>
+          <div class="two fields">
+                <div class="field">
+                    <label>First Name</label>
+                    <input type="text" name="m_firstname" placeholder="First Name" required>
+                </div>
+                <div class="field">
+                    <label>Last Name</label>
+                    <input type="text" name="m_lastname" placeholder="Last Name" required>
+                </div>
+          </div>
+          <div class="two fields">
+              <div class="field">
+                  <label>Email-ID</label>
+                  <input type="text" name="m_email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required></input>
+              </div>
+              <div class="field">
+                  <label>Username</label>
+                  <input type="text" name="m_username" placeholder="Username" onkeyup="nospaces(this)" required maxlength="20"></input>
+              </div>
+          </div>
+          <div class="field">
+               <label>Password</label>
+               <input type="password" id="fpwd" name="m_pwd" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></input>
+          </div>
+          <div class="field">
+               <label>Re-Type Password</label>
+               <input type="password" id="fpwd2" name="m_pwd" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required onfocusout="pwdCheck(this.value)"></input>
+          </div>
+          <div class="field">
+              <label>Mentor/Student:</label>
+              <div>
+                  <label>Mentor</label>
+                  <input type="radio" name="mentor" value="yes" checked></input><span></span><span></span>
+                  <label>Student</label>
+                  <input type="radio" name="mentor" value="no"></input>
+              </div>
+          </div> 
+          <button class="ui button inverted blue">submit</button>
+        </form>
+    </div>  
+
+<% include ./partials/footer %>

@@ -1,0 +1,26 @@
+<% include ./partials/header %>
+<div class="ui main text container piled segment"> 
+        <form  name="myform" class="ui form" onsubmit="return OnSubmitForm();" method="POST">
+          <h3 class="ui dividing header">USER LOGIN PORTAL</h3>
+              <div class="field">
+                  <label>Username</label>
+                  <input type="text" name="username" placeholder="Username" required></input>
+              </div>
+            <div class="field">
+                   <label>Password</label>
+                   <input type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></input>
+            </div>    
+              <div class="field">
+              <label>Mentor/Student:</label>
+              <div>
+                  <label>Mentor</label>
+                  <input type="radio" name="mentor" value="yes" checked></input><span></span><span></span>
+                  <label>Student</label>
+                  <input type="radio" name="mentor" value="no"></input>
+              </div>
+          </div> 
+          <button class="ui button inverted green">login</button>
+        </form>
+    </div>  
+
+<% include ./partials/footer %>
